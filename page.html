@@ -16,12 +16,16 @@
             <p class="text-2xl font-semibold text-gray-700 mb-2">累積功德次數</p>
             <span id="countDisplay" class="text-6xl font-mono text-red-600 block">0</span>
         </div>
+
         <div class="muyu-area relative w-72 h-72 mx-auto my-6 cursor-pointer select-none" id="muyuBtn">
-            <img id="muyuImage" src="static/muyu.png" alt="木魚" class="muyu-static w-full h-full transition duration-50 rounded-full object-contain">
-            <div id="meritText" class="merit-text absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-4xl font-black text-black-700 opacity-0 pointer-events-none whitespace-nowrap">
+            <!-- 1. 圖片直接使用相對路徑指向 static/muyu.png -->
+            <img id="muyuImage" src="static/muyu.png" alt="木魚" class="muyu-static w-full h-full transition duration-75 rounded-full object-contain">
+            
+            <div id="meritText" class="merit-text absolute top-10 left-1/2 -translate-x-1/2 text-2xl font-black text-amber-600 opacity-0 pointer-events-none whitespace-nowrap transition-all duration-300">
                 +1 功德
             </div>
         </div>
+
         <p class="text-gray-500 mb-8 text-lg">點擊上方的木魚即可累積功德！</p>
         <div class="flex justify-center space-x-6">
             <button id="resetBtn" class="button inline-block bg-red-600 text-white py-3 px-8 font-bold text-lg rounded-lg shadow-md hover:bg-red-700 transition duration-150 transform hover:scale-105">
@@ -33,18 +37,37 @@
         </div>
     </div>
 
+    <!-- 2. 載入音效檔案 (相對路徑 static/sound.mp3) -->
+    <audio id="muyuAudio" src="static/sound.mp3" preload="auto"></audio>
+
     <script>
         // ⚠️ 請填入你在 Render 部署獲得的後端網址 ⚠️
         const API_BASE_URL = 'https://test-7q3x.onrender.com';
 
-        // 頁面載入時先向後端獲取目前的功德次數
         $(document).ready(function() {
+            // 初始化：獲取目前功德數
             $.get(`${API_BASE_URL}/api/get_count`, function(data) {
                 $('#countDisplay').text(data.count);
             });
 
-            // 點擊木魚發送 API 請求
+            // 點擊木魚觸發事件
             $('#muyuBtn').on('click', function() {
+                // 1. 播放音效（可重複快速點擊播放）
+                const audio = document.getElementById('muyuAudio');
+                audio.currentTime = 0;
+                audio.play();
+
+                // 2. 木魚縮放縮動畫效果
+                $('#muyuImage').addClass('scale-95');
+                setTimeout(() => $('#muyuImage').removeClass('scale-95'), 100);
+
+                // 3. "+1 功德" 飄字動畫
+                $('#meritText').removeClass('opacity-0 -translate-y-4').addClass('opacity-100 -translate-y-8');
+                setTimeout(() => {
+                    $('#meritText').addClass('opacity-0').removeClass('opacity-100 -translate-y-8').css('transform', '');
+                }, 300);
+
+                // 4. 呼叫後端 API 更新資料庫/記憶體中的數字
                 $.post(`${API_BASE_URL}/api/click_muyu`, function(data) {
                     if (data.success) {
                         $('#countDisplay').text(data.new_count);
@@ -52,7 +75,7 @@
                 });
             });
 
-            // 點擊重置按鈕
+            // 重置功能
             $('#resetBtn').on('click', function() {
                 $.post(`${API_BASE_URL}/api/reset`, function(data) {
                     if (data.success) {
