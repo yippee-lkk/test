@@ -1,25 +1,35 @@
-from flask import Flask, render_template, redirect, url_for, session, request, jsonify
-from datetime import timedelta 
+from flask import Flask, jsonify, request
+from flask_cors import CORS
 
 app = Flask(__name__)
-app.secret_key = 'securemuyu'
-@app.before_request
-def before_request():
-    if 'count' not in session:
-        session['count'] = 0
+# 允許跨網域請求 (CORS)
+CORS(app)
+
+# 簡化說明：在記憶體中記錄次數 (若服務重新啟動會重置；如需持久化可改接資料庫)
+global_count = 0
+
 @app.route('/')
-def index():
-    return render_template('index.html')
-@app.route('/muyu')
-def muyu_page():
-    return render_template('page.html', current_count=session['count'])
-@app.route('/click_muyu', methods=['POST'])
+def home():
+    return jsonify(message="電子木魚 API 運作中！")
+
+@app.route('/api/get_count', methods=['GET'])
+def get_count():
+    """獲取目前功德數"""
+    return jsonify(count=global_count)
+
+@app.route('/api/click_muyu', methods=['POST'])
 def click_muyu():
-    session['count'] += 1
-    session.modified = True 
-    return jsonify(success=True, new_count=session['count'])
-@app.route('/reset')
+    """點擊敲擊木魚 +1"""
+    global global_count
+    global_count += 1
+    return jsonify(success=True, new_count=global_count)
+
+@app.route('/api/reset', methods=['POST'])
 def reset_count():
-    session['count'] = 0
-    session.modified = True
-    return redirect(url_for('muyu_page')) 
+    """重置功德數"""
+    global global_count
+    global_count = 0
+    return jsonify(success=True, new_count=global_count)
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
