@@ -12,7 +12,7 @@ def index():
     return render_template('index.html')
 @app.route('/muyu')
 def muyu_page():
-    return render_template('2.html', current_count=session['count'])
+    return render_template('page.html', current_count=session['count'])
 @app.route('/click_muyu', methods=['POST'])
 def click_muyu():
     session['count'] += 1
