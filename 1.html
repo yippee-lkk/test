@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>各種木魚介紹與電子木魚</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="bg-white"> 
+    <div class="w-full min-h-screen bg-white p-8 md:p-12">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-8 border-b pb-4">
+            佛教法器：各種木魚介紹與分類
+        </h1>
+        <div class="space-y-8 text-left text-gray-700">
+            <h2 id="title-use" class="interactive-title transition duration-300 transform hover:scale-[1.01] text-2xl font-bold text-green-800 border-b pb-1 cursor-pointer">
+                一、按用途分類 (點擊展開)
+            </h2>
+            <div id="content-use" class="category-content ml-2 space-y-4 text-gray-700" style="display: none;">
+                <h3 class="text-xl font-semibold text-green-700">1. 寺院木魚（佛教木魚）</h3>
+                <p class="ml-4 text-base">
+                    <strong>用途：</strong> 誦經、念佛時敲擊保持節奏。<br>
+                    <strong>特點：</strong> 音色清脆、節奏穩定。<br>
+                    <strong>外型：</strong> 圓形或扁圓形，上有魚鱗紋，底部留音孔。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">2. 禪堂引磬木魚（禪宗專用）</h3>
+                <p class="ml-4 text-base">
+                    <strong>用途：</strong> 禪堂作息指令，如開靜、坐禪開始或結束。<br>
+                    <strong>特點：</strong> 音色較低沉，頻率固定。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">3. 法器木魚（大型法事）</h3>
+                <p class="ml-4 text-base">
+                    <strong>用途：</strong> 超度法會、水陸法會等。<br>
+                    <strong>特點：</strong> 體型較大，音量也更強，以帶動集體誦念。
+                </p>
+            </div>
+            <h2 id="title-appearance" class="interactive-title transition duration-300 transform hover:scale-[1.01] text-2xl font-bold text-green-800 border-b pb-1 cursor-pointer">
+                 二、按外型分類 (點擊展開)
+            </h2>
+            <div id="content-appearance" class="category-content ml-2 space-y-4 text-gray-700" style="display: none;">
+                <h3 class="text-xl font-semibold text-green-700">1. 圓形木魚（最常見）</h3>
+                <p class="ml-4 text-base">
+                    多見於寺廟誦經用。圓潤魚身象徵吉祥與覺悟。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">2. 扁魚形（魚板）</h3>
+                <p class="ml-4 text-base">
+                    又稱“擊魚”、“魚板”。形狀為扁平長條形，帶魚頭魚尾浮雕。多用於寺廟作息、齋堂敲擊通知。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">3. 龍雕木魚</h3>
+                <p class="ml-4 text-base">
+                    外表雕有龍紋或龍頭。常見於大型寺院或莊嚴法會。造型華麗，象徵護法與威儀。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">4. 立式大木魚（地木魚）</h3>
+                <p class="ml-4 text-base">
+                    體積巨大，可放在地上敲擊。聲音宏亮，多用於大型誦經場面。
+                </p>
+            </div>
+            <h2 id="title-material" class="interactive-title transition duration-300 transform hover:scale-[1.01] text-2xl font-bold text-green-800 border-b pb-1 cursor-pointer">
+                 三、按材質分類 (點擊展開)
+            </h2>
+            <div id="content-material" class="category-content ml-2 space-y-4 text-gray-700" style="display: none;">
+                <h3 class="text-xl font-semibold text-green-700">1. 樟木木魚（最常用）</h3>
+                <p class="ml-4 text-base">
+                    氣味清香、防蟲、耐用。共鳴好、音色清亮。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">2. 黃楊木木魚</h3>
+                <p class="ml-4 text-base">
+                    木質細密、質地硬。音色較高亢、穿透力強。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">3. 花梨木、紫檀木木魚</h3>
+                <p class="ml-4 text-base">
+                    屬名貴材質，音色厚實。多用于高品質法器或收藏。
+                </p>
+                <h3 class="text-xl font-semibold text-green-700">4. 現代合成材質木魚</h3>
+                <p class="ml-4 text-base">
+                    例如樹脂製木魚。音色穩定、不易變形，價格較低。
+                </p>
+            </div>
+            <h2 class="text-2xl font-bold text-green-800 border-b pb-1 mt-8"> 電子木魚 (Digital Muyu)</h2>
+            <div class="ml-2">
+                <p class="text-base">
+                    <strong>特色：</strong> 科技產物，多為數位應用程式或網頁版。主要用於滿足現代人隨時隨地累積「功德」的需求。
+                </p>
+            </div>
+        </div>
+        <div class="flex justify-center mt-10">
+            <a href="{{ url_for('muyu_page') }}" class="button inline-block bg-green-600 text-white py-4 px-8 font-bold text-lg rounded-lg shadow-md hover:bg-green-700 transition duration-150 transform hover:scale-105">
+                 開始敲擊電子木魚積功德 
+            </a>
+        </div>
+    </div>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'green-muyu': '#45a049',
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>   
+    <script>
+        $(document).ready(function() {
+            $('.interactive-title').on('click', function() {
+                $(this).next('.category-content').slideToggle(300, function() {
+                    const $title = $(this).prev('.interactive-title');
+                    const currentText = $title.text();
+                    if ($(this).is(':visible')) {
+                        $title.text(currentText.replace('點擊展開', '點擊閉合'));
+                    } else {
+                        $title.text(currentText.replace('點擊閉合', '點擊展開'));
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
