@@ -9,7 +9,7 @@ def before_request():
         session['count'] = 0
 @app.route('/')
 def index():
-    return render_template('1.html')
+    return render_template('index.html')
 @app.route('/muyu')
 def muyu_page():
     return render_template('2.html', current_count=session['count'])
